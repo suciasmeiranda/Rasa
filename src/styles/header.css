@@ -1,0 +1,246 @@
+/* ============================================================
+   Announcement, header, navigasi bawah, footer
+   ============================================================ */
+
+.announce {
+  background: var(--ink);
+  color: #f6e8d9;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.announce > svg {
+  color: #f2b544;
+}
+
+.announce__divider {
+  margin: 0 8px;
+  opacity: 0.4;
+}
+
+.announce__muted {
+  color: #b9a696;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 246, 239, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(234, 223, 210, 0.7);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  height: 74px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ink);
+}
+
+.brand__mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  background: linear-gradient(140deg, #f29b5c, #e4572e);
+  box-shadow: 0 10px 20px -10px rgba(228, 87, 46, 0.7);
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.brand__name span {
+  color: var(--brand);
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav__link {
+  border: none;
+  background: transparent;
+  padding: 10px 15px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+  transition:
+    color 0.18s,
+    background 0.18s;
+}
+
+.nav__link:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.nav__link.is-active {
+  color: var(--ink);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.header__actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 13.5px;
+  transition:
+    background 0.18s,
+    transform 0.18s;
+}
+
+.cart-btn:hover {
+  background: #3a2b21;
+  transform: translateY(-1px);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -4px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--cream);
+}
+
+/* ---------- Navigasi bawah (mobile) ---------- */
+
+.bottom-nav {
+  display: none;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  margin-top: 40px;
+  background: var(--ink);
+  color: #e8dbcf;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 1.2fr;
+  gap: 48px;
+  padding-top: 56px;
+  padding-bottom: 40px;
+}
+
+.footer__brand .brand--footer {
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.footer__brand p {
+  color: #b9a696;
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0 0 14px;
+}
+
+.footer__social {
+  display: flex;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #8f7c6d;
+}
+
+.footer__col h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8f7c6d;
+  margin: 6px 0 14px;
+}
+
+.footer__col button {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 9px;
+  color: #d8c6b7;
+  font-size: 13px;
+  text-align: left;
+}
+
+.footer__col button:hover {
+  color: #fff;
+}
+
+.footer__line {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 12.5px;
+  color: #b9a696;
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.footer__line svg {
+  color: var(--brand);
+  margin-top: 2px;
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding-top: 18px;
+  padding-bottom: 26px;
+  font-size: 11.5px;
+  color: #8f7c6d;
+  flex-wrap: wrap;
+}
