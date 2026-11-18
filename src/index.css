@@ -1,3 +1,8 @@
+/* Hallmark · shape: Marquee Hero · genre: editorial · theme: Solstice (dealt 1/3, seed home-kitchen-food-ordering-app-0a6a·0013064b·2026-11-11·r0; brand faces kept: Fraunces + Plus Jakarta Sans) · redesign: full · hero: Poster · nav: edge-aligned · footer: letter close · imagery: photographs, library 2, warm · signature: the menu as a worked ruled index, with the kitchen photographed mid-make
+ * axes: Overlapping|Asymmetric spans|Hairline|Solid|Full-bleed|None · posture: Restrained · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · dropped update('emoji' · emoji tiles are gone from every screen, so the editor field had nothing left to edit */
+/* Hallmark · pre-emit critique: P5 H4 E4 S4 R4 V5 · weakest: S, a warm kitchen could open any food page, so the plate leads with the wok and the trade figures leave the fold */
+@import './styles/tokens.css';
 @import './styles/base.css';
 @import './styles/header.css';
 @import './styles/home.css';

@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import {
-  Bike,
   ChevronDown,
   ChevronUp,
   ClipboardList,
@@ -10,7 +9,6 @@ import {
   RotateCcw,
   Search,
   ShoppingBag,
-  Store,
   XCircle,
 } from 'lucide-react'
 import type { Order } from '../types'
@@ -78,13 +76,11 @@ export function OrdersPage({ onOpenCart }: OrdersPageProps) {
     <>
       <section className="container page-head">
         <div>
-          <span className="section-kicker">Riwayat & status</span>
           <h1>Pesanan saya</h1>
           <p>Pantau pesanan yang sedang berjalan atau pesan lagi menu favoritmu.</p>
         </div>
         <div className="page-head__side">
           <span className="pill pill--active">
-            <span className="live-dot" />
             {counts.aktif} pesanan aktif
           </span>
           <button type="button" className="btn btn--outline" onClick={() => navigate('/')}>
@@ -152,23 +148,12 @@ export function OrdersPage({ onOpenCart }: OrdersPageProps) {
                 <article key={order.id} className="order-card">
                   <div className="order-card__head">
                     <div className="order-card__identity">
-                      <span className="order-card__icon">
-                        {order.fulfillment === 'delivery' ? (
-                          <Bike size={19} />
-                        ) : (
-                          <Store size={19} />
-                        )}
-                      </span>
                       <div>
                         <div className="order-card__code">
                           {order.code}
                           <span>{formatDateTime(order.createdAt)}</span>
                         </div>
                         <p>
-                          {order.items
-                            .slice(0, 3)
-                            .map((item) => item.emoji)
-                            .join(' ')}{' '}
                           {order.items
                             .slice(0, 2)
                             .map((item) => item.name)
@@ -185,7 +170,7 @@ export function OrdersPage({ onOpenCart }: OrdersPageProps) {
 
                   <div className="order-card__summary">
                     <span>
-                      <strong>{itemCount} item</strong> • {FULFILLMENT_LABEL[order.fulfillment]}
+                      <strong>{itemCount} item</strong>, {FULFILLMENT_LABEL[order.fulfillment]}
                     </span>
                     <span>
                       <strong>{formatRupiah(order.total)}</strong>
@@ -214,7 +199,7 @@ export function OrdersPage({ onOpenCart }: OrdersPageProps) {
                       )}
                       <button
                         type="button"
-                        className="btn btn--dark btn--sm"
+                        className="btn btn--outline btn--sm"
                         onClick={() => handleReorder(order)}
                       >
                         <RotateCcw size={15} /> Pesan lagi
@@ -232,7 +217,6 @@ export function OrdersPage({ onOpenCart }: OrdersPageProps) {
                               key={`${item.itemId}-${index}`}
                               className="order-detail__item"
                             >
-                              <span aria-hidden="true">{item.emoji}</span>
                               <div>
                                 <strong>
                                   {item.qty}× {item.name}
@@ -287,7 +271,7 @@ export function OrdersPage({ onOpenCart }: OrdersPageProps) {
                           <p>
                             <CreditCard size={15} />
                             <span>
-                              {PAYMENT_LABEL[order.payment]} •{' '}
+                              {PAYMENT_LABEL[order.payment]},{' '}
                               {FULFILLMENT_LABEL[order.fulfillment]}
                             </span>
                           </p>

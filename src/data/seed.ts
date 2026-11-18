@@ -20,7 +20,7 @@ export const seedMenu: MenuItem[] = [
     id: 'm-geprek',
     name: 'Ayam Geprek Sambal Matah',
     description:
-      'Ayam crispy digeprek dengan sambal matah segar, nasi hangat, dan lalapan. Level pedas 1–5.',
+      'Ayam crispy digeprek dengan sambal matah segar, nasi hangat, dan lalapan. Level pedas 1 sampai 5.',
     price: 32_000,
     category: 'Makanan Utama',
     emoji: '🍗',

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useState, type CSSProperties, type FormEvent } from 'react'
 import {
   AlertTriangle,
   ArrowRight,
@@ -114,7 +114,7 @@ export function AdminPage() {
   }, [paidOrders])
 
   const topItems = useMemo(() => {
-    const map = new Map<string, { name: string; emoji: string; qty: number }>()
+    const map = new Map<string, { name: string; qty: number }>()
     paidOrders.forEach((order) => {
       order.items.forEach((item) => {
         const existing = map.get(item.itemId)
@@ -123,7 +123,6 @@ export function AdminPage() {
         } else {
           map.set(item.itemId, {
             name: item.name,
-            emoji: item.emoji,
             qty: item.qty,
           })
         }
@@ -179,7 +178,6 @@ export function AdminPage() {
     <>
       <section className="container page-head">
         <div>
-          <span className="section-kicker">Panel admin</span>
           <h1>Kelola Rasa Dapur</h1>
           <p>Pantau penjualan, atur menu, dan proses pesanan pelanggan dari satu tempat.</p>
         </div>
@@ -188,7 +186,6 @@ export function AdminPage() {
             <ShieldCheck size={14} /> Mode demo
           </span>
           <span className="pill pill--active">
-            <span className="live-dot" />
             {activeOrders} pesanan aktif
           </span>
         </div>
@@ -227,7 +224,7 @@ export function AdminPage() {
           <div className="admin-section">
             <div className="stats-grid">
               <div className="stat-card">
-                <span className="stat-card__icon stat-card__icon--orange">
+                <span className="stat-card__icon">
                   <Wallet size={19} />
                 </span>
                 <div>
@@ -237,7 +234,7 @@ export function AdminPage() {
                 </div>
               </div>
               <div className="stat-card">
-                <span className="stat-card__icon stat-card__icon--blue">
+                <span className="stat-card__icon">
                   <ReceiptText size={19} />
                 </span>
                 <div>
@@ -247,7 +244,7 @@ export function AdminPage() {
                 </div>
               </div>
               <div className="stat-card">
-                <span className="stat-card__icon stat-card__icon--purple">
+                <span className="stat-card__icon">
                   <Timer size={19} />
                 </span>
                 <div>
@@ -257,7 +254,7 @@ export function AdminPage() {
                 </div>
               </div>
               <div className="stat-card">
-                <span className="stat-card__icon stat-card__icon--green">
+                <span className="stat-card__icon">
                   <UtensilsCrossed size={19} />
                 </span>
                 <div>
@@ -319,16 +316,13 @@ export function AdminPage() {
                     {topItems.list.map((item, index) => (
                       <div key={item.name} className="top-item">
                         <span className="top-item__rank">{index + 1}</span>
-                        <span className="top-item__emoji" aria-hidden="true">
-                          {item.emoji}
-                        </span>
                         <div className="top-item__info">
                           <div>
                             <strong>{item.name}</strong>
                             <span>{formatCompact(item.qty)} porsi</span>
                           </div>
                           <div className="progress progress--thin">
-                            <span style={{ width: `${(item.qty / topItems.max) * 100}%` }} />
+                            <span style={{ '--progress': item.qty / topItems.max } as CSSProperties} />
                           </div>
                         </div>
                       </div>
@@ -361,7 +355,8 @@ export function AdminPage() {
                       <div className="recent-order__main">
                         <strong>{order.code}</strong>
                         <span>
-                          {order.customer.name} • {order.items.reduce((sum, item) => sum + item.qty, 0)} item
+                          {order.customer.name},{' '}
+                          {order.items.reduce((sum, item) => sum + item.qty, 0)} item
                         </span>
                       </div>
                       <span className="recent-order__total">{formatRupiah(order.total)}</span>
@@ -432,12 +427,9 @@ export function AdminPage() {
                     <tr key={item.id}>
                       <td>
                         <div className="table-menu">
-                          <span className="table-menu__emoji" aria-hidden="true">
-                            {item.emoji}
-                          </span>
                           <div>
                             <strong>{item.name}</strong>
-                            <span>{item.tags.join(' • ') || item.category}</span>
+                            <span>{item.tags.join(', ') || item.category}</span>
                           </div>
                         </div>
                       </td>
@@ -558,7 +550,7 @@ export function AdminPage() {
                           <div>
                             <strong>{order.code}</strong>
                             <span>
-                              {formatShortDate(order.createdAt)} • {timeAgo(order.createdAt)}
+                              {formatShortDate(order.createdAt)}, {timeAgo(order.createdAt)}
                             </span>
                           </div>
                         </div>
@@ -576,7 +568,7 @@ export function AdminPage() {
                           <strong>
                             {order.items.reduce((sum, item) => sum + item.qty, 0)} item
                           </strong>
-                          <small>{FULFILLMENT_LABEL[order.fulfillment]} • {PAYMENT_LABEL[order.payment]}</small>
+                          <small>{FULFILLMENT_LABEL[order.fulfillment]}, {PAYMENT_LABEL[order.payment]}</small>
                         </div>
                         <div>
                           <span className="admin-order__label">Total</span>
@@ -605,7 +597,7 @@ export function AdminPage() {
                           {next && (
                             <button
                               type="button"
-                              className="btn btn--dark btn--sm"
+                              className="btn btn--outline btn--sm"
                               onClick={() => updateOrderStatus(order.id, next)}
                             >
                               <CheckCircle2 size={15} />
@@ -640,7 +632,6 @@ export function AdminPage() {
                                   key={`${item.itemId}-${index}`}
                                   className="order-detail__item"
                                 >
-                                  <span aria-hidden="true">{item.emoji}</span>
                                   <div>
                                     <strong>
                                       {item.qty}× {item.name}
@@ -690,7 +681,7 @@ export function AdminPage() {
                               <p>
                                 <CreditCard size={15} />
                                 <span>
-                                  {PAYMENT_LABEL[order.payment]} •{' '}
+                                  {PAYMENT_LABEL[order.payment]},{' '}
                                   {FULFILLMENT_LABEL[order.fulfillment]}
                                 </span>
                               </p>
@@ -807,7 +798,7 @@ const EMPTY_DRAFT: Draft = {
   description: '',
   price: '',
   category: 'Makanan Utama',
-  emoji: '🍽️',
+  emoji: '',
   rating: '4.8',
   sold: '0',
   prepTime: '15',
@@ -874,7 +865,7 @@ function MenuEditor({
     }
     if (!Number.isFinite(price) || price <= 0) nextErrors.price = 'Harga harus lebih dari 0.'
     if (!Number.isFinite(rating) || rating < 0 || rating > 5) {
-      nextErrors.rating = 'Rating 0–5.'
+      nextErrors.rating = 'Rating 0 sampai 5.'
     }
     if (!Number.isFinite(prepTime) || prepTime < 1) {
       nextErrors.prepTime = 'Waktu minimal 1 menit.'
@@ -891,7 +882,7 @@ function MenuEditor({
       description: draft.description.trim(),
       price,
       category: draft.category,
-      emoji: draft.emoji.trim() || '🍽️',
+      emoji: draft.emoji.trim(),
       rating: Math.min(5, Math.max(0, rating)),
       sold: Math.max(0, Math.round(Number.isFinite(sold) ? sold : 0)),
       prepTime: Math.max(1, Math.round(prepTime)),
@@ -918,28 +909,16 @@ function MenuEditor({
       size="md"
     >
       <form className="modal__body menu-form" onSubmit={handleSubmit} noValidate>
-        <div className="field-row">
-          <label className="field">
-            <span>Nama menu</span>
-            <input
-              className={`input ${errors.name ? 'is-invalid' : ''}`}
-              value={draft.name}
-              onChange={(event) => update('name', event.target.value)}
-              placeholder="Contoh: Nasi Goreng Kampung"
-            />
-            {errors.name && <small className="field__error">{errors.name}</small>}
-          </label>
-          <label className="field field--emoji">
-            <span>Emoji</span>
-            <input
-              className="input"
-              value={draft.emoji}
-              onChange={(event) => update('emoji', event.target.value)}
-              maxLength={4}
-              placeholder="🍛"
-            />
-          </label>
-        </div>
+        <label className="field">
+          <span>Nama menu</span>
+          <input
+            className={`input ${errors.name ? 'is-invalid' : ''}`}
+            value={draft.name}
+            onChange={(event) => update('name', event.target.value)}
+            placeholder="Contoh: Nasi Goreng Kampung"
+          />
+          {errors.name && <small className="field__error">{errors.name}</small>}
+        </label>
 
         <label className="field">
           <span>Deskripsi</span>

@@ -75,10 +75,9 @@ export function SuccessPage({ orderId }: SuccessPageProps) {
           <span className="success-ring" aria-hidden="true">
             <Check size={40} strokeWidth={3} />
           </span>
-          <span className="section-kicker">Pesanan diterima</span>
           <h1>Terima kasih, {order.customer.name.split(' ')[0]}!</h1>
           <p>
-            Pesananmu sudah diteruskan ke dapur. Kami masak fresh dan kabari lewat
+            Pesananmu sudah diteruskan ke dapur. Masak fresh dan kabari lewat
             status pesanan.
           </p>
           <div className="success-meta">
@@ -115,7 +114,6 @@ export function SuccessPage({ orderId }: SuccessPageProps) {
             <div className="order-detail__items">
               {order.items.map((item, index) => (
                 <div key={`${item.itemId}-${index}`} className="order-detail__item">
-                  <span aria-hidden="true">{item.emoji}</span>
                   <div>
                     <strong>
                       {item.qty}× {item.name}

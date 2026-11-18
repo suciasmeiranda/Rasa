@@ -2,7 +2,6 @@ import {
   ClipboardList,
   LayoutDashboard,
   ShoppingBag,
-  Sparkles,
   UtensilsCrossed,
 } from 'lucide-react'
 import { useStore } from '../store/StoreContext'
@@ -27,12 +26,9 @@ export function Header({ active, onOpenCart }: HeaderProps) {
   return (
     <>
       <div className="announce">
-        <Sparkles size={14} />
-        <span>
-          Gratis ongkir untuk pesanan di atas Rp100.000
-          <span className="announce__divider">•</span>
-          <span className="announce__muted">Buka setiap hari 09.00–21.00</span>
-        </span>
+        <span>Gratis ongkir untuk pesanan di atas Rp100.000</span>
+        <span className="announce__sep" aria-hidden="true" />
+        <span className="announce__muted">Buka setiap hari 09.00 sampai 21.00</span>
       </div>
       <header className="header">
         <div className="container header__inner">
@@ -42,9 +38,9 @@ export function Header({ active, onOpenCart }: HeaderProps) {
             onClick={() => navigate('/')}
             aria-label="Rasa, kembali ke menu"
           >
-            <span className="brand__mark">🍜</span>
+            <span className="brand__mark" aria-hidden="true">R</span>
             <span className="brand__name">
-              Rasa<span>.</span>
+              Rasa<span className="brand__dot">.</span>
             </span>
           </button>
 

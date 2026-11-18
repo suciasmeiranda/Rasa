@@ -5,7 +5,6 @@ import { STATUS_LABEL, STATUS_SHORT, statusSteps } from '../lib/order'
 export function StatusBadge({ status }: { status: OrderStatus }) {
   return (
     <span className={`status status--${status}`}>
-      <span className="status__dot" />
       {STATUS_SHORT[status]}
     </span>
   )

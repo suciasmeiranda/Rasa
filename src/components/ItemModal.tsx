@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Clock3, Flame, Minus, Plus, ShoppingBag, Star } from 'lucide-react'
 import type { MenuItem } from '../types'
 import { Modal } from './Modal'
-import { categorySlug, formatCompact, formatRupiah } from '../lib/format'
+import { formatCompact, formatRupiah } from '../lib/format'
 
 interface ItemModalProps {
   item: MenuItem | null
@@ -28,12 +28,11 @@ export function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
       open={Boolean(item)}
       onClose={onClose}
       title={item.name}
-      subtitle={`${item.category} • ${formatRupiah(item.price)}`}
+      subtitle={item.category}
       size="md"
       className="item-modal"
     >
-      <div className={`item-modal__tile tile--${categorySlug(item.category)}`}>
-        <span aria-hidden="true">{item.emoji}</span>
+      <div className="item-modal__body">
         <div className="item-modal__tags">
           {item.tags.map((tag) => (
             <span key={tag} className="badge">
@@ -42,9 +41,7 @@ export function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
             </span>
           ))}
         </div>
-      </div>
 
-      <div className="item-modal__body">
         <div className="item-modal__meta">
           <span className="rating">
             <Star size={14} fill="currentColor" /> {item.rating.toFixed(1)}
@@ -99,9 +96,14 @@ export function ItemModal({ item, onClose, onAdd }: ItemModalProps) {
             disabled={unavailable}
           >
             <ShoppingBag size={18} />
-            {unavailable
-              ? 'Sedang habis'
-              : `Tambah • ${formatRupiah(item.price * qty)}`}
+            {unavailable ? (
+              'Sedang habis'
+            ) : (
+              <>
+                <span>Tambah</span>
+                <span className="btn__value">{formatRupiah(item.price * qty)}</span>
+              </>
+            )}
           </button>
         </div>
       </div>

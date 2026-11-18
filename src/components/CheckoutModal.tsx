@@ -94,7 +94,7 @@ export function CheckoutModal({ open, onClose, onSuccess }: CheckoutModalProps) 
     }
     const digits = form.phone.replace(/\D/g, '')
     if (digits.length < 9 || digits.length > 15) {
-      nextErrors.phone = 'Nomor HP tidak valid (9–15 digit).'
+      nextErrors.phone = 'Nomor HP tidak valid (9 sampai 15 digit).'
     }
     if (fulfillment === 'delivery' && form.address.trim().length < 8) {
       nextErrors.address = 'Alamat pengantaran perlu diisi lebih lengkap.'
@@ -168,7 +168,7 @@ export function CheckoutModal({ open, onClose, onSuccess }: CheckoutModalProps) 
                   </span>
                   <span>
                     <strong>Diantar</strong>
-                    <small>± {estimate} menit • {totals.deliveryFee === 0 ? 'Gratis ongkir' : formatRupiah(totals.deliveryFee)}</small>
+                    <small>± {estimate} menit, {totals.deliveryFee === 0 ? 'Gratis ongkir' : formatRupiah(totals.deliveryFee)}</small>
                   </span>
                 </button>
                 <button
@@ -183,7 +183,7 @@ export function CheckoutModal({ open, onClose, onSuccess }: CheckoutModalProps) 
                   </span>
                   <span>
                     <strong>Ambil sendiri</strong>
-                    <small>± {estimate} menit • Tanpa ongkir</small>
+                    <small>± {estimate} menit, tanpa ongkir</small>
                   </span>
                 </button>
               </div>
@@ -309,9 +309,6 @@ export function CheckoutModal({ open, onClose, onSuccess }: CheckoutModalProps) 
             <div className="checkout__items">
               {lines.map((line) => (
                 <div key={line.itemId} className="checkout-item">
-                  <span className="checkout-item__emoji" aria-hidden="true">
-                    {line.item.emoji}
-                  </span>
                   <div>
                     <strong>
                       {line.qty}× {line.item.name}

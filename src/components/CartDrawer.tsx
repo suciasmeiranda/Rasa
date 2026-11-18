@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import {
   ArrowRight,
   Bike,
@@ -14,7 +14,6 @@ import { navigate } from '../router'
 import { lockScroll, unlockScroll } from '../lib/scrollLock'
 import {
   calcTotals,
-  categorySlug,
   formatRupiah,
   FREE_DELIVERY_MIN,
   PROMOS,
@@ -126,7 +125,7 @@ export function CartDrawer({ open, onClose, onCheckout }: CartDrawerProps) {
                   )}
                 </div>
                 <div className="progress">
-                  <span style={{ width: `${progress}%` }} />
+                  <span style={{ '--progress': progress / 100 } as CSSProperties} />
                 </div>
               </div>
 
@@ -136,9 +135,6 @@ export function CartDrawer({ open, onClose, onCheckout }: CartDrawerProps) {
                     key={line.itemId}
                     className={`cart-line ${!line.item.available ? 'is-unavailable' : ''}`}
                   >
-                    <div className={`cart-line__tile tile--${categorySlug(line.item.category)}`}>
-                      <span aria-hidden="true">{line.item.emoji}</span>
-                    </div>
                     <div className="cart-line__info">
                       <div className="cart-line__top">
                         <h3>{line.item.name}</h3>
@@ -156,7 +152,7 @@ export function CartDrawer({ open, onClose, onCheckout }: CartDrawerProps) {
                       </span>
                       {line.notes && <p className="cart-line__notes">“{line.notes}”</p>}
                       {!line.item.available && (
-                        <p className="cart-line__warning">Menu sedang habis — hapus dulu</p>
+                        <p className="cart-line__warning">Menu sedang habis, hapus dulu</p>
                       )}
                       <div className="cart-line__bottom">
                         <div className="stepper stepper--sm">
@@ -230,7 +226,7 @@ export function CartDrawer({ open, onClose, onCheckout }: CartDrawerProps) {
                       }}
                       aria-label="Kode promo"
                     />
-                    <button type="submit" className="btn btn--dark" disabled={!code.trim()}>
+                    <button type="submit" className="btn btn--outline" disabled={!code.trim()}>
                       Pakai
                     </button>
                   </form>

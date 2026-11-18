@@ -21,6 +21,12 @@ npm run preview    # pratinjau hasil build
 npm run typecheck  # cek tipe saja
 ```
 
+## Deploy ke GitHub Pages
+
+Push ke `main` otomatis build dan deploy lewat `.github/workflows/deploy.yml`. Sekali saja setelah repo dibuat, buka **Settings → Pages** lalu set **Source** ke **GitHub Actions**.
+
+Situs akan tersedia di `https://<username>.github.io/MakanYuk/`. Workflow menjalankan build dengan `GITHUB_PAGES=true`, yang membuat Vite memakai base path `/MakanYuk/`. Build lokal (`npm run build`) tetap memakai root, jadi aman untuk Vercel, Netlify, atau domain sendiri.
+
 ## Fitur pelanggan
 
 - **Katalog menu** dengan pencarian, filter kategori, dan pengurutan (populer, harga, rating).

@@ -4,3 +4,8 @@ dist-ssr
 *.local
 .DS_Store
 .vite
+
+# tooling desain / agent, bukan bagian aplikasi
+.agents
+.hallmark
+skills-lock.json
